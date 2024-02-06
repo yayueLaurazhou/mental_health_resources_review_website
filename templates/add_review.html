@@ -12,9 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-
-
-    <!--Navbar-->
+     <!--Navbar-->
     <div class="p-2 bg-secondary text-white">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -30,48 +28,24 @@
         </div>
     </div>
 
-    <section class="col-lg-6 m-5 mx-auto justify-content-center">
-        <div class="d-flex gap-2 d-sm-flex justify-content-center">
+     <section class="col-lg-6 m-5 mx-auto justify-content-center">
          <div class="d-flex gap-2 d-sm-flex justify-content-center">
-             <form method="POST" action=""  class="col-12 d-flex justify-content-center col-lg-auto w-100 h-100">
-                        {{ form.hidden_tag() }}
-                 <p>{{ form.search }}</p>
+             {{ ckeditor.load() }}
+             {{ ckeditor.config(name='review') }}
+             <form method="POST" action="">
+                 {{ form.hidden_tag() }}
+                 <p>{{ form.rating }}</p>
+                 <p>{{ form.review }}</p>
                  <p>{{ form.submit }}</p>
              </form>
          </div>
-        </div>
     </section>
 
 
-    <!--search result-->
-    {% for resource in resources %}
-        <section class="col-lg-6 mx-auto justify-content-center">
-            <div class="card m-5">
-              <div class="card-body">
-                <h5 class="card-title">{{ resource.name }}</h5>
-                <p class="card-text">
-                    {% if resource.description is not none %}
-                        {{ resource.description }}
-                    {% endif %}
-                </p>
-              </div>
-              <ul class="list-group list-group-flush">
-                {% for review in resource.reviews %}
-                  <li class="list-group-item">
-                      {% for _ in range(review.rating) %}
-                        <span>⭐</span>
-                      {% endfor %}<br>
-                      {{ review.content }}</li>
-                {% endfor %}
-              </ul>
-              <div class="card-body">
-                <a href="{{url_for('review', resource_id = resource.id)}}" class="btn btn-warning float-end">Write a review</a>
-              </div>
-            </div>
-        </section>
-    {% endfor %}
+
+
+
+
+
 </body>
 </html>
-
-
-

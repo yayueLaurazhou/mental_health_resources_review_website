@@ -3,9 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Text
 from flask_migrate import Migrate
-from forms import SearchForm, CreateResourceForm, CommentForm
+from forms import SearchForm, CreateResourceForm, ReviewForm
+from flask_bootstrap import Bootstrap4
 from flask_ckeditor import CKEditor
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBfqeuibnvuiguosdk139r93b'
@@ -18,6 +18,7 @@ class Base(DeclarativeBase):
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resources.db'
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
+bootstrap = Bootstrap4(app)
 ckeditor = CKEditor(app)
 migrate = Migrate(app, db)
 
@@ -45,24 +46,38 @@ class Reviews(db.Model):
 def home():
     form = SearchForm()
     if form.validate_on_submit():
-        search_word = form.search.data
-        query_result = set(Resources.query.filter(Resources.name.like(f'%{search_word}%')).all())
-        query_result.update(Resources.query.filter(Reviews.content.like(f'%{search_word}%')).all())
-        session['search'] = search_word
-        session['result'] = [{'name': resource.name, 'description': resource.description} for resource in query_result]
-        return render_template('search.html')
+        session['search'] = form.search.data
+        return redirect(url_for('search'))
     return render_template("index.html", form=form)
 
 
 @app.route('/search', methods=['get', 'post'])
 def search():
-    return render_template("search.html")
+    search_word = session.get('search')
+    form = SearchForm(search=search_word)
+    query_result = set(Resources.query.filter(Resources.name.like(f'%{search_word}%')).all())
+    query_result.update(Resources.query.filter(Reviews.content.like(f'%{search_word}%')).all())
+    if form.validate_on_submit():
+        search_word = form.search.data
+        query_result = set(Resources.query.filter(Resources.name.like(f'%{search_word}%')).all())
+        query_result.update(Resources.query.filter(Reviews.content.like(f'%{search_word}%')).all())
+        return render_template("search.html", form=form, resources=query_result)
+    return render_template("search.html", form=form, resources=query_result)
 
 
+@app.route('/comment/<int:resource_id>', methods=['get', 'post'])
+def review(resource_id):
+    form = ReviewForm()
+    if form.validate_on_submit():
+        new_review = Reviews(
+            rating=form.rating.data,
+            content=form.review_text.data,
+            resource_id=resource_id
+        )
+        db.session.add(new_review)
+        return redirect(url_for('search'))
+    return render_template('add_review.html', form=form)
 
-@app.route('/')
-def review():
-    pass
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
