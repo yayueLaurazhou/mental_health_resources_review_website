@@ -1,12 +1,12 @@
-# use the full column search technique from books review website, using like key word
-# design the page to display search results
-# if there is no result and the data matches an address format, use nhs online local help to search and store in database, and display results
-
-# design the page to add new place
-# create wtf form for user to add a review to an existing form
-# design the page to write a review
+# # use the full column search technique from books review website, using like key word
+# # design the page to display search results
+# # if there is no result and the data matches an address format, use nhs online local help to search and store in database, and display results
 #
-
+# # design the page to add new place
+# # create wtf form for user to add a review to an existing form
+# # design the page to write a review
+# #
+#
 import requests
 import time
 from selenium import webdriver
@@ -90,21 +90,35 @@ for name, link in zip(names, links):
             db.session.rollback()
             print(f'Error adding resource: {e}')
 
+resource1 = Resources(name='Mind side by side', description='https://sidebyside.mind.org.uk')
+review1 = Reviews(rating=3, content='An interesting community, but the content is a bit boring.', parent_resource=resource1)
+resource2 = Resources(name='Samaritans', description='https://www.samaritans.org/')
+review2 = Reviews(rating=5, content='There is always someone there, although they can only give you a very limited time. Sometimes, listening to a human voice telling me that everything is ok is helpful.', parent_resource=resource2)
+resource3 = Resources(name='WPF Therapy', description='https://wpf.org.uk/')
+review3 = Reviews(rating=3, content='A counselor at my university used to recommend this place, it is a shame that they are permanently closed!', parent_resource=resource3)
+resource4 = Resources(name='IESO Online talking therapy', description='https://www.iesohealth.com/')
+review4 = Reviews(rating=2, content='Not very useful. Doesn\'t feel very personal.', parent_resource=resource4)
+resource5 = Resources(name='Mind Anxiety/Mood Peer Support Group', description='https://www.mindincamden.org.uk/services/free-support-groups')
+review5 = Reviews(rating=4, content='The session is quite structured, and the facilitators are well-prepared. Can actually learn something from the one hour session online.', parent_resource=resource5)
+with app.app_context():
+    db.session.add(resource2,review2)
+    db.session.add(resource3,review3)
+    db.session.add(resource4,review4)
+    db.session.add(resource5,review5)
+    db.session.commit()
 
-
-
-# search on https://www.nhs.uk/service-search/mental-health/find-an-urgent-mental-health-helpline/result?Latitude=51.52532527480014&Longitude=-0.1307660796246909&Answer=yes&Age=18
-# from geopy.geocoders import Nominatim
-
-# def get_lat_long(postcode):
-#     geolocator = Nominatim(user_agent="geoapiExercises")
-#     location = geolocator.geocode(postcode)
-#     if location:
-#         return location.latitude, location.longitude
-#     else:
-#         return None, None
+# # search on https://www.nhs.uk/service-search/mental-health/find-an-urgent-mental-health-helpline/result?Latitude=51.52532527480014&Longitude=-0.1307660796246909&Answer=yes&Age=18
+# # from geopy.geocoders import Nominatim
 #
-# # Example usage
-# postcode = "SW1A 1AA"  # Replace with any UK postcode
-# latitude, longitude = get_lat_long(postcode)
-# print(f"Latitude: {latitude}, Longitude: {longitude}")
+# # def get_lat_long(postcode):
+# #     geolocator = Nominatim(user_agent="geoapiExercises")
+# #     location = geolocator.geocode(postcode)
+# #     if location:
+# #         return location.latitude, location.longitude
+# #     else:
+# #         return None, None
+# #
+# # # Example usage
+# # postcode = "SW1A 1AA"  # Replace with any UK postcode
+# # latitude, longitude = get_lat_long(postcode)
+# # print(f"Latitude: {latitude}, Longitude: {longitude}")
