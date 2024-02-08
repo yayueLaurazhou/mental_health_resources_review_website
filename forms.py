@@ -17,6 +17,6 @@ class CreateResourceForm(FlaskForm):
 
 
 class ReviewForm(FlaskForm):
-    rating = SelectField('Rate the resource', choices=[(1, '⭐'), (2, '⭐⭐'),(3, '⭐⭐⭐'),(4, '⭐⭐⭐⭐'),(5, '⭐⭐⭐⭐⭐')])
-    review_text = CKEditorField("Comment", validators=[DataRequired()])
-    submit = SubmitField("Submit Comment")
+    rating = SelectField("Your rating", choices=[(1, '⭐'), (2, '⭐⭐'), (3, '⭐⭐⭐'), (4, '⭐⭐⭐⭐'), (5, '⭐⭐⭐⭐⭐')], render_kw={"class":"form-select"})
+    review_text = CKEditorField("Share your story", validators=[DataRequired()])
+    submit = SubmitField("Submit Review", render_kw={"class": "btn btn-warning"})

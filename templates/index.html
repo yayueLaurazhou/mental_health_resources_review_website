@@ -1,28 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Care Grade</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-</head>
-<body>
-    <!-- NavBar -->
-    <div class="p-2 bg-secondary text-white">
-        <div class="container">
-          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/" class="d-flex px-10 text-white text-decoration-none">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-heart-fill" viewBox="0 0 16 16"><path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/></svg>
-            </a>
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-    </div>
+{% extends "base.html" %}
 
+
+{% block content %}
     <!-- Text and Search Bar -->
     <section class="col-lg-12 mx-auto" style="background-image: url('static/img/search_bar_background.png');background-position: center;">
         <div class="bg-light col-lg-12 mx-auto bg-opacity-50">
@@ -172,22 +151,5 @@
       </div>
     </div>
 
-    <!-- Footer -->
-    <div class="container">
-        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-          <p>© 2024 Yayue, Zhou. All rights reserved.</p>
-          <p>yayuezhou2020@gmail.com</p>
-        </div>
-    </div>
 
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+{% endblock %}

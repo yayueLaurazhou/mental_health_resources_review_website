@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <style>
+        body {
+          background-color: #FFEBEE !important;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+<div class="col-lg-6 m-5 mx-auto lead">
+    <h3><span style="font-family: fantasy">Care Grade</span> is a mental health support service.</h3>
+    <h4>Its inspiration comes from 2023 <a href="https://womenwhocode.com/">Women Who Code</a> Hackathon. <br>It is made for people who want to share their experience about what kind of support works for them, and what doesn't.</h4>
+    <p>Listings on this site to any specific product, process or service is for the information and convenience of the public and does not constitute an endorsement by the Care Grade. While we try our best to ensure accurate information, The Care Grade cannot be held responsible for any inaccurate or incomplete information contained within this website.</p>
+    <p>The data of the website comes from the <a href="https://developers.google.com/maps/documentation/places/web-service/search-text">Google Map API</a> and <a href="https://hubofhope.co.uk/">the Hub of Hope</a>.</p>
+    <h4>Privacy Policy</h4>
+    <p>We do not sell, trade, or otherwise transfer to outside parties any of the information you share.</p>
+</div>
+{% endblock %}

@@ -68,6 +68,7 @@ def search():
 @app.route('/comment/<int:resource_id>', methods=['get', 'post'])
 def review(resource_id):
     form = ReviewForm()
+    resource = db.get_or_404(Resources,resource_id)
     if form.validate_on_submit():
         new_review = Reviews(
             rating=form.rating.data,
@@ -75,9 +76,14 @@ def review(resource_id):
             resource_id=resource_id
         )
         db.session.add(new_review)
+        print("review added successfully!")
         return redirect(url_for('search'))
-    return render_template('add_review.html', form=form)
+    return render_template('add_review.html', form=form, resource=resource)
 
+
+@app.route('/about', methods=['get'])
+def about():
+    return render_template('about.html')
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
