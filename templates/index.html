@@ -9,13 +9,11 @@
                 <img class="d-block mx-auto mb-4" src="static/img/rating.jpg" alt="rating-image" width="180" height="57">
                 <h1 class="display-5 fw-bold text-body-emphasis text-center pt-1" style="font-family: fantasy;">Care Grade</h1>
                 <p class="lead mb-4 text-center">Search for mental health resources. Rate your experience on a clinic, therapist, helpline, charity, or any method of treatment.<br> Your story matters.</p>
-                <div class="d-flex gap-2 d-sm-flex justify-content-center">
-                    <form method="POST" action=""  class="col-12 d-flex justify-content-center col-lg-auto mb-3 w-100 h-100">
+                <form method="POST" action=""  class="col-12 d-flex justify-content-center col-lg-auto gap-2 w-100 h-100">
                         {{ form.hidden_tag() }}
                         <p>{{ form.search }}</p>
                         <p>{{ form.submit }}</p>
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
 

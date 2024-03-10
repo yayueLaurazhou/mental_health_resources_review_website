@@ -10,46 +10,48 @@
 {% endblock %}
 
 {% block content %}
-    <section class="col-lg-6 m-5 mx-auto justify-content-center">
-        <div class="d-flex gap-2 d-sm-flex justify-content-center">
-         <div class="d-flex gap-2 d-sm-flex justify-content-center">
-             <form method="POST" action=""  class="col-12 d-flex justify-content-center col-lg-auto w-100 h-100">
-                        {{ form.hidden_tag() }}
-                 <p>{{ form.search }}</p>
-                 <p>{{ form.submit }}</p>
-             </form>
-         </div>
+<p></p>
+    <section class="col-lg-6 mx-auto">
+        {% if message %}
+            <p class="m-5 lead">{{ message }}</p>
+        {% endif %}
+        <form method="POST" action=""  class="col-12 d-flex gap-2 justify-content-start m-5 col-lg-auto w-100 h-100">
+            {{ form.hidden_tag() }}
+            <p>{{ form.search }}</p>
+            <p>{{ form.submit }}</p>
+        </form>
+
+        <!--search result-->
+        {% for resource in resources %}
+                <div class="card m-5">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ resource.name }}</h5>
+                    <p class="card-text">
+                        {% if resource.description is not none %}
+                            {{ resource.description|safe }}
+                        {% endif %}
+                    </p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    {% for review in resource.reviews %}
+                      <li class="list-group-item">
+                          {% for _ in range(review.rating) %}
+                            <span>⭐</span>
+                          {% endfor %}<br>
+                          {{ review.content|safe }}</li>
+                    {% endfor %}
+                  </ul>
+                  <div class="card-body">
+                    <a href="{{url_for('review', resource_id = resource.id)}}" class="btn btn-warning float-end">Write a review</a>
+                  </div>
+                </div>
+        {% endfor %}
+
+        <!-- Add new resource-->
+        <div class="bg-light text-dark d-flex gap-3 justify-content-end m-5" >
+            <em class="col-md-8 fs-4">Haven't found the resource you are looking for? Add a new resource!</em>
+            <a class="btn btn-outline-warning btn-lg float-end" href="{{url_for('resource')}}">Add a <br>resource</a>
         </div>
     </section>
-
-
-    <!--search result-->
-    {% for resource in resources %}
-        <section class="col-lg-6 mx-auto justify-content-center">
-            <div class="card m-5">
-              <div class="card-body">
-                <h5 class="card-title">{{ resource.name }}</h5>
-                <p class="card-text">
-                    {% if resource.description is not none %}
-                        {{ resource.description }}
-                    {% endif %}
-                </p>
-              </div>
-              <ul class="list-group list-group-flush">
-                {% for review in resource.reviews %}
-                  <li class="list-group-item">
-                      {% for _ in range(review.rating) %}
-                        <span>⭐</span>
-                      {% endfor %}<br>
-                      {{ review.content }}</li>
-                {% endfor %}
-              </ul>
-              <div class="card-body">
-                <a href="{{url_for('review', resource_id = resource.id)}}" class="btn btn-warning float-end">Write a review</a>
-              </div>
-            </div>
-        </section>
-    {% endfor %}
-
 {% endblock %}
 

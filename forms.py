@@ -6,14 +6,14 @@ from wtforms.validators import DataRequired
 
 class SearchForm(FlaskForm):
     search = StringField("word", validators=[DataRequired()],
-                         render_kw={"placeholder": "Search for resources", "class": "form-control text-bg-dark mr-3"})
-    submit = SubmitField("Search", render_kw={"class": "btn btn-warning"})
+                         render_kw={"placeholder": "Search for resources", "class": "form-control form-control-lg text-bg-dark mr-3"})
+    submit = SubmitField("Search", render_kw={"class": "btn btn-warning btn-lg"})
 
 
-class CreateResourceForm(FlaskForm):
-    name = StringField("Blog Post Title", validators=[DataRequired()])
-    description = CKEditorField("Blog Content", validators=[DataRequired()])
-    submit = SubmitField("Submit Post")
+class ResourceForm(FlaskForm):
+    name = StringField("Resource Name", validators=[DataRequired()], render_kw={"class":"form-control"})
+    description = CKEditorField("Description", validators=[DataRequired()])
+    submit = SubmitField("Add Resource", render_kw={"class": "btn btn-warning btn-lg"})
 
 
 class ReviewForm(FlaskForm):
