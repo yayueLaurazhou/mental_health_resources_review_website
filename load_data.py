@@ -20,7 +20,7 @@ with app.app_context():
     db.create_all()
 
 # scraping google map
-google_map_api_key = 'AIzaSyCxx7amiHqoluPhl7fWX_O7B9wrzd4nOr0'
+google_map_api_key = API_KEY
 location = '51.5072%2C0.1276'  # London's lag and log
 base_url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?'
 next_page_base_url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
